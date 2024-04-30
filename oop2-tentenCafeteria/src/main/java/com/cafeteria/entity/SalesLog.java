@@ -3,6 +3,12 @@ package com.cafeteria.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+<<<<<<< HEAD:oop2-tentenCafeteria/src/main/java/com/cafeteria/entity/SalesLog.java
+=======
+import lombok.Getter;
+import lombok.Setter;
+
+>>>>>>> 95d6ecc4cc903e73e0e4b43eea79a2fd4fbbefc2:oop2-tentenCafeteria/src/main/java/entity/SalesLog.java
 import java.util.Date;
 @Getter
 @Setter
