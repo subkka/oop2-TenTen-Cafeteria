@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "박수빈",
+    "coupon": 5,
+    "allergyInfo": {
+      "allergens": ["백미", "두부", "고추"]
+    }
+  },
+  {
+    "id": 2,
+    "name": "이용준",
+    "coupon": 3,
+    "allergyInfo": {
+      "allergens": ["미역", "고추가루", "마늘"]
+    }
+  },
+  {
+    "id": 3,
+    "name": "신윤정",
+    "coupon": 7,
+    "allergyInfo": {
+      "allergens": ["고구마순", "소금", "마늘"]
+    }
+  },
+  {
+    "id": 4,
+    "name": "양희윤",
+    "coupon": 2,
+    "allergyInfo": {
+      "allergens": ["시래기", "마늘", "시금치"]
+    }
+  },
+  {
+    "id": 5,
+    "name": "나지영",
+    "coupon": 8,
+    "allergyInfo": {
+      "allergens": ["대파", "고추장", "시금치"]
+    }
+  },
+  {
+    "id": 6,
+    "name": "김도현",
+    "coupon": 4,
+    "allergyInfo": {
+      "allergens": ["시금치", "가지", "대파"]
+    }
+  },
+  {
+    "id": 7,
+    "name": "김로또",
+    "coupon": 6,
+    "allergyInfo": {
+      "allergens": ["무", "계란", "찰현미"]
+    }
+  },
+  {
+    "id": 8,
+    "name": "김또또",
+    "coupon": 1,
+    "allergyInfo": {
+      "allergens": ["찰현미", "소금", "계란"]
+    }
+  }
+]
