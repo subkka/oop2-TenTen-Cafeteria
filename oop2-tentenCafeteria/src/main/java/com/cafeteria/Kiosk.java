@@ -1,4 +1,9 @@
+package com.cafeteria;
 
+import com.cafeteria.entity.Customer;
+import com.cafeteria.entity.Menu;
+import com.cafeteria.repository.MenuRepository;
+import com.cafeteria.repository.SalesRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +15,8 @@ public class Kiosk {
     private List<Menu> weeklyMenu;
     private SalesRepository salesRepository;
     private MenuRepository menuRepository;
+
+    public Kiosk() {}
     public Kiosk(Date currentDate, List<Menu> weeklyMenu, SalesRepository salesRepository, MenuRepository menuRepository) {
         this.currentDate = currentDate;
         this.weeklyMenu = weeklyMenu;
@@ -52,9 +59,7 @@ public class Kiosk {
         System.out.println("식권 " + num + "장을 구매하였습니다.");
         return customer.getCoupon();
     }
-  
 
-  
 
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
         AllergyInfo commonAllergies = new AllergyInfo();
