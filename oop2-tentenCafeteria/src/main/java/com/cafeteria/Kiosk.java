@@ -1,13 +1,15 @@
 package com.cafeteria;
 
-import entity.AllergyInfo;
-import entity.Customer;
-import entity.Menu;
+import com.cafeteria.entity.AllergyInfo;
+import com.cafeteria.entity.Customer;
+import com.cafeteria.entity.Menu;
 import repository.MenuRepository;
 import repository.SalesRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Kiosk {
     private Date currentDate;
@@ -26,7 +28,9 @@ public class Kiosk {
         System.out.println(dailyMenu);
     }
     public void displayWeekMenu() {
+
         Date endDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
         weeklyMenu = menuRepository.readMenuInfo(currentDate, endDate);
         System.out.println("주간 식단");
         for (Menu menu : weeklyMenu) {
@@ -47,18 +51,54 @@ public class Kiosk {
         return customer;
     }
     public int buyCoupon(Customer customer) {
-
-        customer.setCoupon(customer.getCoupon() + 10);
-        System.out.println("쿠폰 10장을 구매하였습니다.");
+        System.out.println("식권을 구매하시겠습니까?");
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        customer.setCoupon(customer.getCoupon() + num);
+        System.out.println("식권 " + num + "장을 구매하였습니다.");
         return customer.getCoupon();
     }
-    public AllergyInfo compareAllergy(AllergyInfo allergyInfo) {
+  
+    public AllergyInfo compareAllergy(AllergyInfo customerAllerge) {
         for (Menu menu : weeklyMenu) {
             AllergyInfo menuAllergyInfo = menu.getAllergyInfo();
-            if (menuAllergyInfo != null && menuAllergyInfo.getAllergens().contains(allergyInfo)) {
-                return allergyInfo;
+            if (menuAllergyInfo == cutomerAllergeinfo) {
+                return
+            }
+            else if (menuAllergyInfo != customerAllerge){
+                System.out.println();
             }
         }
-        return null;
+        return null
     }
+  
+
+    public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
+        AllergyInfo commonAllergies = new AllergyInfo();
+
+        for (Menu menu : weeklyMenu) {
+            AllergyInfo menuAllergyInfo = menu.getAllergyInfo();
+            List<String> commonAllergens = findCommonAllergens(customerAllergy, menuAllergyInfo);
+
+            if (!commonAllergens.isEmpty()) {
+                commonAllergies.addAllergens(commonAllergens);
+            }
+        }
+
+        return commonAllergies;
+    }
+  
+
+    private List<String> findCommonAllergens(AllergyInfo customerAllergy, AllergyInfo menuAllergy) {
+        List<String> commonAllergens = new ArrayList<>();
+
+        for (String allergen : customerAllergy.getAllergens()) {
+            if (menuAllergy.getAllergens().contains(allergen)) {
+                commonAllergens.add(allergen);
+            }
+        }
+
+        return commonAllergens;
+    }
+  
 }

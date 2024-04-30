@@ -1,8 +1,12 @@
 package com.cafeteria.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 public class Meal {
     private String foodType;
     private String foodName;
