@@ -1,10 +1,11 @@
 package tentenCafeteria.src.main.java;
 
-import repository.MenuRepository;
-import repository.SalesRepository;
+
 import tentenCafeteria.src.main.java.entity.AllergyInfo;
 import tentenCafeteria.src.main.java.entity.Customer;
 import tentenCafeteria.src.main.java.entity.Menu;
+import tentenCafeteria.src.main.java.repository.MenuRepository;
+import tentenCafeteria.src.main.java.repository.SalesRepository;
 
 import java.util.Date;
 import java.util.List;
