@@ -1,10 +1,10 @@
-package entity;
+package tentenCafeteria.src.main.java.entity;
 
 public class Customer {
     private int id;
     private String name;
     private int coupon;
-    AllergyInfo allergyInfo;
+    entity.AllergyInfo allergyInfo;
 
     public int getId() {
         return id;

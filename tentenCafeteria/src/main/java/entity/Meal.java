@@ -1,4 +1,4 @@
-package entity;
+package tentenCafeteria.src.main.java.entity;
 
 import java.util.ArrayList;
 import java.util.List;

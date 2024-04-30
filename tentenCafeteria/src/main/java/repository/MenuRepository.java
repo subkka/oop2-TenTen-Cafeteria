@@ -1,6 +1,8 @@
 package repository;
 
-import entity.Menu;
+
+
+import tentenCafeteria.src.main.java.entity.Menu;
 
 import java.util.ArrayList;
 import java.util.Date;

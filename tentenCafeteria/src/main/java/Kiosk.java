@@ -1,9 +1,11 @@
-import entity.AllergyInfo;
-import entity.Customer;
-import entity.Menu;
-import entity.SalesLog;
+package tentenCafeteria.src.main.java;
+
 import repository.MenuRepository;
 import repository.SalesRepository;
+import tentenCafeteria.src.main.java.entity.AllergyInfo;
+import tentenCafeteria.src.main.java.entity.Customer;
+import tentenCafeteria.src.main.java.entity.Menu;
+
 import java.util.Date;
 import java.util.List;
 public class Kiosk {
