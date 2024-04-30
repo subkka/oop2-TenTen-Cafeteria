@@ -1,4 +1,4 @@
-package entity;
+package com.cafeteria.entity;
 
 public class Customer {
     private int id;
