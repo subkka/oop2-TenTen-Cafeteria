@@ -1,4 +1,4 @@
-package repository;
+package com.cafeteria.repository;
 
 import entity.SalesLog;
 import org.json.JSONArray;
