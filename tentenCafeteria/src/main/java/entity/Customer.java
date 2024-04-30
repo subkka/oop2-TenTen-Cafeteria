@@ -4,7 +4,7 @@ public class Customer {
     private int id;
     private String name;
     private int coupon;
-    entity.AllergyInfo allergyInfo;
+    AllergyInfo allergyInfo;
 
     public int getId() {
         return id;

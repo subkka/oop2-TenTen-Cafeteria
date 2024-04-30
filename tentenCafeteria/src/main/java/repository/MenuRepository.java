@@ -1,4 +1,4 @@
-package repository;
+package tentenCafeteria.src.main.java.repository;
 
 
 
