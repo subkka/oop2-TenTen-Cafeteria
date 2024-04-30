@@ -1,7 +1,5 @@
 package tentenCafeteria.src.main.java.repository;
 
-
-
 import tentenCafeteria.src.main.java.entity.Menu;
 
 import java.util.ArrayList;

@@ -46,11 +46,11 @@ public class Kiosk {
         }
         return customer;
     }
-    public Customer buyCoupon(Customer customer) {
+    public int buyCoupon(Customer customer) {
 
         customer.setCoupon(customer.getCoupon() + 10);
         System.out.println("쿠폰 10장을 구매하였습니다.");
-        return customer;
+        return customer.getCoupon();
     }
     public AllergyInfo compareAllergy(AllergyInfo allergyInfo) {
         for (Menu menu : weeklyMenu) {
