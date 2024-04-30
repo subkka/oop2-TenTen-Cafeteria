@@ -1,10 +1,4 @@
-package com.cafeteria;
 
-import com.cafeteria.entity.AllergyInfo;
-import com.cafeteria.entity.Customer;
-import com.cafeteria.entity.Menu;
-import repository.MenuRepository;
-import repository.SalesRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,18 +53,7 @@ public class Kiosk {
         return customer.getCoupon();
     }
   
-    public AllergyInfo compareAllergy(AllergyInfo customerAllerge) {
-        for (Menu menu : weeklyMenu) {
-            AllergyInfo menuAllergyInfo = menu.getAllergyInfo();
-            if (menuAllergyInfo == cutomerAllergeinfo) {
-                return
-            }
-            else if (menuAllergyInfo != customerAllerge){
-                System.out.println();
-            }
-        }
-        return null
-    }
+
   
 
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {

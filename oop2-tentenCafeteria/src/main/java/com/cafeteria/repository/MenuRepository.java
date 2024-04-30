@@ -1,8 +1,7 @@
 package com.cafeteria.repository;
 
 
-import com.cafeteria.entity.Menu;
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,8 +46,18 @@ public class MenuRepository {
                 // 각 객체에서 필요한 정보를 추출하여 Menu 객체로 변환합니다.
                 String name = jsonObject.getString("name");
                 Date date = new Date(jsonObject.getLong("date"));
+                // JSON 형식으로 저장된 알러지 정보를 AllergyInfo 객체로 변환합니다.
+                JSONObject allergyInfoObject = jsonObject.getJSONObject("allergyInfo");
+                List<String> allergens = new ArrayList<>();
+                JSONArray allergensArray = allergyInfoObject.getJSONArray("allergens");
+                for (int j = 0; j < allergensArray.length(); j++) {
+                    allergens.add(allergensArray.getString(j));
+                }
+                AllergyInfo allergyInfo = new AllergyInfo();
+                allergyInfo.setAllergens(allergens);
+
                 // Menu 객체를 생성하여 menuList에 추가합니다.
-                Menu menu = new Menu(name, date);
+                Menu menu = new Menu(name, date, allergyInfo);
                 menuList.add(menu);
             }
         } catch (JSONException e) {
@@ -65,6 +74,14 @@ public class MenuRepository {
             try {
                 jsonObject.put("name", menu.getMeals());
                 jsonObject.put("date", menu.getDate().getTime());
+                // AllergyInfo 객체를 JSON 형식으로 변환하여 저장합니다.
+                AllergyInfo allergyInfo = menu.getAllergyInfo();
+                JSONObject allergyInfoObject = new JSONObject();
+                List<String> allergens = allergyInfo.getAllergens();
+                JSONArray allergensArray = new JSONArray(allergens);
+                allergyInfoObject.put("allergens", allergensArray);
+                jsonObject.put("allergyInfo", allergyInfoObject);
+
                 jsonArray.put(jsonObject);
             } catch (JSONException e) {
                 e.printStackTrace();
