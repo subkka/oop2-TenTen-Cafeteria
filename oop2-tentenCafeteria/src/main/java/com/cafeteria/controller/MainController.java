@@ -1,7 +1,7 @@
 package com.cafeteria.controller;
 
 import com.cafeteria.Admin;
-import repository.Kiosk;
+import com.cafeteria.Kiosk;
 import java.util.Scanner;
 
 public class MainController {
