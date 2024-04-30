@@ -82,6 +82,10 @@ public class Kiosk {
             }
         }
 
+
+
+
+        
         return commonAllergens;
     }
   
