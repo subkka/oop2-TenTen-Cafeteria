@@ -1,13 +1,8 @@
-package entity;
-
-
-import lombok.Getter;
-import lombok.Setter;
+package com.cafeteria.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@Setter
+
 public class AllergyInfo {
     public List<String> getAllergens() {
         return allergens;

@@ -1,3 +1,15 @@
+package com.cafeteria;
+
+import com.cafeteria.entity.AllergyInfo;
+import com.cafeteria.entity.Customer;
+import com.cafeteria.entity.Menu;
+import repository.MenuRepository;
+import repository.SalesRepository;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
 public class Kiosk {
     private Date currentDate;
