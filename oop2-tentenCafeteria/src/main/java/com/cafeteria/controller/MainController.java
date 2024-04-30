@@ -34,11 +34,10 @@ public class MainController {
         // 고객 선택 (고객의 수만큼 반복)
         while( cnt < customerList.size() ) {
             if (userType == 1) {
-                System.out.print(
-                        """
-                                1. 메뉴보기
-                                2. 식권개수 조회
-                                """);
+                System.out.print("""
+                        1. 메뉴보기
+                        2. 식권개수 조회
+                        """);
                 while (sc.hasNext()) {
                     int chooseNum = sc.nextInt();
                     // 메뉴보기
@@ -57,14 +56,14 @@ public class MainController {
                             if (buyCouponYN == 'Y') {
                                 // 쿠폰 구매 후 고객 정보
                                 Customer customerCouponAmount = kiosk.buyCoupon(customer);
-                                customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
+                                customerRepository.addCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
                                 continue;
                             } else {
                                 // 식권이 0장일때
                                 if (customer.getCoupon() == 0) {
                                     System.out.println("보유 식권은 0장입니다. 구매창으로 이동합니다");
                                     Customer customerCouponAmount = kiosk.buyCoupon(customer);
-                                    customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
+                                    customerRepository.addCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
                                     continue;
                                     // 식권이 1장 이상일때
                                 } else {
@@ -76,7 +75,7 @@ public class MainController {
                                     if (eatYN == 'Y') {
                                         // 쿠폰 사용 후 쿠폰 개수 -1된 고객 정보
                                         Customer customerUseCoupon = kiosk.useCoupon(customer);
-                                        customerRepository.modifyCustomerInfo(customerUseCoupon);
+                                        customerRepository.addCustomerInfo(customerUseCoupon);
                                         System.out.println("배식 완료");
                                         cnt++;
                                         break;
@@ -94,21 +93,20 @@ public class MainController {
                         }
                     }
                     // 1. 메뉴보기, 2.식권개수 조회 아닌 다른 숫자 입력했을시 오류출력
-                    else
+                    else {
                         System.out.println("잘못된 입력입니다.");
-                    break;
+                        break;
+                    }
                 }
             }
 
-
             // 관리자
             else {
-                System.out.print(
-                        """
-                                매출 조회를 선택하세요
-                                1. 원하는 기간의 매출 조회
-                                2. 현재 매출 조회
-                                """);
+                System.out.print("""
+                        매출 조회를 선택하세요
+                        1. 원하는 기간의 매출 조회
+                        2. 현재 매출 조회
+                        """);
                 while (sc.hasNext()) {
                     int chooseNum = sc.nextInt();
 
@@ -134,7 +132,7 @@ public class MainController {
         try {
             startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDateString);
         } catch (ParseException e) {
-            System.out.println("잘못 입력하셨습니다.");
+            System.out.println("잘못된 입력입니다.");
             e.printStackTrace();
         }
 
@@ -145,7 +143,7 @@ public class MainController {
         try {
             endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDateString);
         } catch (ParseException e) {
-            System.out.println("잘못 입력하셨습니다.");
+            System.out.println("잘못된 입력입니다.");
             e.printStackTrace();
         }
 
@@ -154,7 +152,7 @@ public class MainController {
 
     // Customer json 파일에서 고객 정보 읽어오기
     public List<Customer> readCustomerInfo() {
-        return null;
+        return customerRepository.readCustomerInfo();
     }
 
     // 오늘의 점심 메뉴 or 일주일 식단표 보여주기
@@ -169,10 +167,13 @@ public class MainController {
         switch (select) {
             case 1:
                 kiosk.displayDailyMenu();
+                break;
             case 2:
                 kiosk.displayWeekMenu();
+                break;
             default:
                 System.out.println("잘못된 입력입니다.");
+                break;
         }
     }
 }
