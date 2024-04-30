@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SalesRepository {
     private List<SalesLog> salesLogList;
-    private static final String JSON_FILE_PATH = "sales_data.json";
+    private static final String JSON_FILE_PATH = "/src/main/resources/saleData";
 
     public SalesRepository() {
         salesLogList = readSalesFromJson();
@@ -22,7 +22,7 @@ public class SalesRepository {
     }
 
     private List<SalesLog> readSalesFromJson() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(JSON_FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/src/main/resources/saleData"))) {
             StringBuilder jsonString = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -77,7 +77,7 @@ public class SalesRepository {
         salesLogList.add(salesLog);
         String jsonSalesLogList = writeSalesToJson(salesLogList);
         // 변환된 JSON 문자열을 파일에 씁니다.
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(JSON_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/src/main/resources/saleData"))) {
             writer.write(jsonSalesLogList);
         } catch (IOException e) {
             e.printStackTrace();

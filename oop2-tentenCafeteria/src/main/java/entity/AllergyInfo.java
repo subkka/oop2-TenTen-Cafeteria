@@ -19,6 +19,7 @@ public class AllergyInfo {
 
     List<String> allergens = new ArrayList<>();
 
-    public void addAllergens(List<String> commonAllergens) {
+    public List<String> addAllergens(List<String> commonAllergens) {
+        return allergens;
     }
 }
