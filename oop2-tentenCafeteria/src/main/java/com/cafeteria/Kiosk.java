@@ -1,8 +1,10 @@
-import entity.AllergyInfo;
-import entity.Customer;
-import entity.Menu;
-import repository.MenuRepository;
-import repository.SalesRepository;
+package com.cafeteria;
+
+import com.cafeteria.entity.AllergyInfo;
+import com.cafeteria.entity.Customer;
+import com.cafeteria.entity.Menu;
+import com.cafeteria.repository.MenuRepository;
+import com.cafeteria.repository.SalesRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
