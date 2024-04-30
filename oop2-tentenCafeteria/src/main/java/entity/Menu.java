@@ -13,7 +13,7 @@ public class Menu {
     List<Meal> meals = new ArrayList<>();
     AllergyInfo allergyInfo;
 
-    public Menu(String name, Date date) {
+    public Menu(String name, Date date, AllergyInfo allergyInfo) {
     }
 
     public List<Meal> getMeals() {
