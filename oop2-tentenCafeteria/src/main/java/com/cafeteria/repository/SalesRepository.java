@@ -3,7 +3,7 @@ package com.cafeteria.repository;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.cafeteria.entity.SalesLog;
 import com.google.gson.Gson;
@@ -14,7 +14,7 @@ public class SalesRepository {
     private static final String SALES_FILE_PATH = "sales.json";
 
     // 매출 정보를 수정하고 추가된 경우 true를 반환하고, 그렇지 않으면 false를 반환한다.
-    public boolean modifySalesInfo(SalesLog salesLog) {
+    public boolean addSalesInfo(SalesLog salesLog) {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -39,7 +39,7 @@ public class SalesRepository {
     }
 
     // 원하는 기간의 매출 정보를 읽어온다.
-    public SalesInfo readSalesInfo(Date startDate, Date endDate) {
+    public SalesInfo readSalesInfo(LocalDate startDate, LocalDate endDate) {
         try {
             Gson gson = new Gson();
 
