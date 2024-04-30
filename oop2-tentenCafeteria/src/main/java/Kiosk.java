@@ -68,7 +68,6 @@ public class Kiosk {
         return customer;
     }
 
-
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
         AllergyInfo commonAllergies = new AllergyInfo();
 
