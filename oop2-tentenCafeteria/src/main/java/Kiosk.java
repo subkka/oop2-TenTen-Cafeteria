@@ -14,6 +14,10 @@ public class Kiosk {
     private List<Menu> weeklyMenu;
     private SalesRepository salesRepository;
     private MenuRepository menuRepository;
+
+    public Kiosk() {
+    }
+
     public Kiosk(Date currentDate, List<Menu> weeklyMenu, SalesRepository salesRepository, MenuRepository menuRepository) {
         this.currentDate = currentDate;
         this.weeklyMenu = weeklyMenu;
@@ -48,13 +52,20 @@ public class Kiosk {
         }
         return customer;
     }
-    public int buyCoupon(Customer customer) {
-        System.out.println("식권을 구매하시겠습니까?");
+    public Customer buyCoupon(Customer customer) {
         Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        customer.setCoupon(customer.getCoupon() + num);
-        System.out.println("식권 " + num + "장을 구매하였습니다.");
-        return customer.getCoupon();
+        while (true) {
+            System.out.println("식권을 몇장 구매하시겠습니까? (1장에서 10장까지 가능합니다)");
+            int num = sc.nextInt();
+            if (num >= 1 && num <= 10) {
+                customer.setCoupon(customer.getCoupon() + num);
+                System.out.println("식권 " + num + "장을 구매하였습니다.");
+                break;
+            } else {
+                System.out.println("1에서 10 사이의 값을 입력하세요.");
+            }
+        }
+        return customer;
     }
 
 
@@ -81,11 +92,6 @@ public class Kiosk {
                 commonAllergens.add(allergen);
             }
         }
-
-
-
-
-        
         return commonAllergens;
     }
   

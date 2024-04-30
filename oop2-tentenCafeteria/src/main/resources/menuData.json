@@ -1,0 +1,191 @@
+[
+  {
+    "date": "2024-04-01T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "백미",
+        "ingredients": [
+          "백미"
+        ]
+      },
+      {
+        "foodType": "국",
+        "foodName": "된장찌개",
+        "ingredients": [
+          "된장",
+          "두부",
+          "고추"
+        ]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "오이무침",
+        "ingredients": [
+          "오이",
+          "고추가루",
+          "마늘"
+        ]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": [
+        "된장",
+        "고추가루",
+        "마늘"
+      ]
+    }
+  },
+  {
+    "date": "2024-04-02T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "흑미",
+        "ingredients": [
+          "흑미"
+        ]
+      },
+      {
+        "foodType": "국",
+        "foodName": "미역국",
+        "ingredients": [
+          "미역",
+          "다시멸치",
+          "소금"
+        ]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "고구마순나물",
+        "ingredients": [
+          "고구마순",
+          "고추장",
+          "마늘"
+        ]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": [
+        "마늘",
+        "미역",
+        "고구마순"
+      ]
+    }
+  },
+  {
+    "date": "2024-04-03T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "백미",
+        "ingredients": ["백미"]
+      },
+      {
+        "foodType": "국",
+        "foodName": "된장찌개",
+        "ingredients": ["된장", "두부", "고추"]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "오이무침",
+        "ingredients": ["오이", "고추가루", "마늘"]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": ["오이", "두부", "고추"]
+    }
+  },
+  {
+    "date": "2024-04-04T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "흑미",
+        "ingredients": ["흑미"]
+      },
+      {
+        "foodType": "국",
+        "foodName": "미역국",
+        "ingredients": ["미역", "다시멸치", "소금"]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "고구마순나물",
+        "ingredients": ["고구마순", "고추장", "마늘"]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": ["다시멸치", "소금", "마늘"]
+    }
+  },
+  {
+    "date": "2024-04-05T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "보리밥",
+        "ingredients": ["보리"]
+      },
+      {
+        "foodType": "국",
+        "foodName": "시래기국",
+        "ingredients": ["시래기", "된장", "대파"]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "시금치나물",
+        "ingredients": ["시금치", "소금", "마늘"]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": ["된장", "마늘", "시래기"]
+    }
+  },
+  {
+    "date": "2024-04-06T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "현미밥",
+        "ingredients": ["현미"]
+      },
+      {
+        "foodType": "국",
+        "foodName": "된장국",
+        "ingredients": ["된장", "두부", "대파"]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "가지볶음",
+        "ingredients": ["가지", "고추장", "마늘"]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": ["가지", "대파", "고추장"]
+    }
+  },
+  {
+    "date": "2024-04-07T12:00:00Z",
+    "meals": [
+      {
+        "foodType": "밥",
+        "foodName": "찰현미밥",
+        "ingredients": ["찰현미"]
+      },
+      {
+        "foodType": "국",
+        "foodName": "맑은계란국",
+        "ingredients": ["계란", "소금", "대파"]
+      },
+      {
+        "foodType": "반찬",
+        "foodName": "무생채",
+        "ingredients": ["무", "고추장", "마늘"]
+      }
+    ],
+    "allergyInfo": {
+      "ingredients": ["무", "계란", "찰현미"]
+    }
+  }
+]

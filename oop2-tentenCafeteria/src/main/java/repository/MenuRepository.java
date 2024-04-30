@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MenuRepository {
     private List<Menu> menuList;
-    private static final String JSON_FILE_PATH = "menu_data.json";
+    private static final String JSON_FILE_PATH = "/src/main/resources/menuData";
 
     public MenuRepository() {
         menuList = readMenuFromJson();
@@ -23,7 +23,7 @@ public class MenuRepository {
     }
 
     private List<Menu> readMenuFromJson() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(JSON_FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/src/main/resources/menuData"))) {
             StringBuilder jsonString = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -78,7 +78,7 @@ public class MenuRepository {
         menuList.add(menu);
         String jsonMenuList = writeMenuToJson(menuList);
         // 변환된 JSON 문자열을 파일에 씁니다.
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(JSON_FILE_PATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/src/main/resources/menuData"))) {
             writer.write(jsonMenuList);
         } catch (IOException e) {
             e.printStackTrace();
