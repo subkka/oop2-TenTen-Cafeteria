@@ -1,7 +1,5 @@
 package com.cafeteria.repository;
 
-
-
 import com.cafeteria.entity.AllergyInfo;
 import com.cafeteria.entity.Menu;
 import org.json.JSONArray;
