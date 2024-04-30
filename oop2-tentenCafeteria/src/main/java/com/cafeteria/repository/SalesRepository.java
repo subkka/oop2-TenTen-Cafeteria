@@ -1,13 +1,13 @@
-package repository;
+package com.cafeteria.repository;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
+import com.cafeteria.entity.SalesLog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entity.SalesLog;
 
 public class SalesRepository {
 

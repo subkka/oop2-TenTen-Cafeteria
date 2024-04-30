@@ -1,8 +1,7 @@
-package repository;
+package com.cafeteria.repository;
 
-import entity.AllergyInfo;
-import entity.Menu;
-import org.json.JSONArray;
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

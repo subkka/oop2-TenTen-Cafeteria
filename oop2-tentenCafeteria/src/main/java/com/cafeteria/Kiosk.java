@@ -1,8 +1,4 @@
-import entity.AllergyInfo;
-import entity.Customer;
-import entity.Menu;
-import repository.MenuRepository;
-import repository.SalesRepository;
+
 
 import java.util.ArrayList;
 import java.util.Date;

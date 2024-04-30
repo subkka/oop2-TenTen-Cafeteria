@@ -1,13 +1,9 @@
-package entity;
-
-import lombok.Getter;
-import lombok.Setter;
+package com.cafeteria.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-@Getter
-@Setter
+
 public class Menu {
     private Date date;
     List<Meal> meals = new ArrayList<>();
