@@ -4,7 +4,7 @@ import com.cafeteria.repository.SalesRepository;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Admin {
     @Setter
@@ -20,7 +20,7 @@ public class Admin {
     }
 
     // 원하는 기간의 매출 정보 가져오기
-    public int getSales(LocalDate startDate, LocalDate endDate) {
+    public int getSales(Date startDate, Date endDate) {
         salesRepository.readSalesInfo(startDate, endDate);
         return 0;
     }

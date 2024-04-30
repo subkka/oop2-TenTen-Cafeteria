@@ -1,6 +1,6 @@
 package com.cafeteria.repository;
 
-import entity.SalesLog;
+import com.cafeteria.entity.SalesLog;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
