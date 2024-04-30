@@ -1,13 +1,3 @@
-import entity.AllergyInfo;
-import entity.Customer;
-import entity.Menu;
-import repository.MenuRepository;
-import repository.SalesRepository;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 
 public class Kiosk {
     private Date currentDate;
@@ -26,7 +16,9 @@ public class Kiosk {
         System.out.println(dailyMenu);
     }
     public void displayWeekMenu() {
-        Date endDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000); // 1 week later
+
+        Date endDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
         weeklyMenu = menuRepository.readMenuInfo(currentDate, endDate);
         System.out.println("주간 식단");
         for (Menu menu : weeklyMenu) {
@@ -54,6 +46,7 @@ public class Kiosk {
         System.out.println("식권 " + num + "장을 구매하였습니다.");
         return customer.getCoupon();
     }
+  
     public AllergyInfo compareAllergy(AllergyInfo customerAllerge) {
         for (Menu menu : weeklyMenu) {
             AllergyInfo menuAllergyInfo = menu.getAllergyInfo();
@@ -66,6 +59,7 @@ public class Kiosk {
         }
         return null
     }
+  
 
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
         AllergyInfo commonAllergies = new AllergyInfo();
@@ -81,6 +75,7 @@ public class Kiosk {
 
         return commonAllergies;
     }
+  
 
     private List<String> findCommonAllergens(AllergyInfo customerAllergy, AllergyInfo menuAllergy) {
         List<String> commonAllergens = new ArrayList<>();
@@ -93,4 +88,5 @@ public class Kiosk {
 
         return commonAllergens;
     }
+  
 }

@@ -9,6 +9,14 @@ import java.util.List;
 @Getter
 @Setter
 public class AllergyInfo {
+    public List<String> getAllergens() {
+        return allergens;
+    }
+
+    public void setAllergens(List<String> allergens) {
+        this.allergens = allergens;
+    }
+
     List<String> allergens = new ArrayList<>();
 
 }
