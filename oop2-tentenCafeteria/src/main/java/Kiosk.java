@@ -1,3 +1,13 @@
+import entity.AllergyInfo;
+import entity.Customer;
+import entity.Menu;
+import repository.MenuRepository;
+import repository.SalesRepository;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
 public class Kiosk {
     private Date currentDate;
@@ -46,20 +56,7 @@ public class Kiosk {
         System.out.println("식권 " + num + "장을 구매하였습니다.");
         return customer.getCoupon();
     }
-  
-    public AllergyInfo compareAllergy(AllergyInfo customerAllerge) {
-        for (Menu menu : weeklyMenu) {
-            AllergyInfo menuAllergyInfo = menu.getAllergyInfo();
-            if (menuAllergyInfo == cutomerAllergeinfo) {
-                return
-            }
-            else if (menuAllergyInfo != customerAllerge){
-                System.out.println();
-            }
-        }
-        return null
-    }
-  
+
 
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
         AllergyInfo commonAllergies = new AllergyInfo();
@@ -75,7 +72,6 @@ public class Kiosk {
 
         return commonAllergies;
     }
-  
 
     private List<String> findCommonAllergens(AllergyInfo customerAllergy, AllergyInfo menuAllergy) {
         List<String> commonAllergens = new ArrayList<>();

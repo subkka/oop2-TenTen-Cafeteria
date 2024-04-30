@@ -10,6 +10,11 @@ public class SalesLog {
     private Date saleDate;
     private int sales;
 
+    public SalesLog(Date saleDate, int sales) {
+        this.saleDate = saleDate;
+        this.sales = sales;
+    }
+
     public Date getSaleDate() {
         return saleDate;
     }
