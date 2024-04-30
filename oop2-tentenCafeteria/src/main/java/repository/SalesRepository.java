@@ -32,7 +32,7 @@ public class SalesRepository {
             return parseJsonToSalesLogList(jsonString.toString());
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -73,7 +73,7 @@ public class SalesRepository {
         return jsonArray.toString();
     }
 
-    public void addSalesLog(SalesLog salesLog) {
+    public synchronized void addSalesLog(SalesLog salesLog) {
         salesLogList.add(salesLog);
         String jsonSalesLogList = writeSalesToJson(salesLogList);
         // 변환된 JSON 문자열을 파일에 씁니다.
