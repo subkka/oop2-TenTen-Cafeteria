@@ -1,16 +1,17 @@
 package com.cafeteria.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 @Getter
 @Setter
+
 public class SalesLog {
     private Date saleDate;
     private int sales;
 
-    public SalesLog() {}
     public SalesLog(Date saleDate, int sales) {
         this.saleDate = saleDate;
         this.sales = sales;
