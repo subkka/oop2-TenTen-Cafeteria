@@ -12,27 +12,30 @@ import java.util.List;
 
 public class CustomerRepository {
     private List<Customer> customerList;
-    private static final String JSON_FILE_PATH = "/src/main/resources/customerData";
+    private static final String JSON_FILE_PATH = "oop2-tentenCafeteria/src/main/resources/customerData.json";
 
     public CustomerRepository() {
         customerList = readCustomerFromJson();
+
         if (customerList == null) {
             customerList = new ArrayList<>();
         }
     }
 
     private List<Customer> readCustomerFromJson() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("/src/main/resources/customerData"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(JSON_FILE_PATH))) {
             StringBuilder jsonString = new StringBuilder();
             String line;
+
             while ((line = reader.readLine()) != null) {
                 jsonString.append(line);
             }
+
             // JSON 문자열을 Customer 리스트로 변환
             return parseJsonToCustomerList(jsonString.toString());
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -41,6 +44,7 @@ public class CustomerRepository {
         try {
             // JSON 배열 형태로 저장된 데이터를 읽어오기
             JSONArray jsonArray = new JSONArray(jsonString);
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -53,9 +57,11 @@ public class CustomerRepository {
                 JSONObject allergyInfoObject = jsonObject.getJSONObject("allergyInfo");
                 List<String> allergens = new ArrayList<>();
                 JSONArray allergensArray = allergyInfoObject.getJSONArray("allergens");
+
                 for (int j = 0; j < allergensArray.length(); j++) {
                     allergens.add(allergensArray.getString(j));
                 }
+
                 AllergyInfo allergyInfo = new AllergyInfo();
                 allergyInfo.setAllergens(allergens);
 
@@ -77,18 +83,7 @@ public class CustomerRepository {
             JSONObject jsonObject = new JSONObject();
 
             try {
-                jsonObject.put("id", customer.getId());
-                jsonObject.put("name", customer.getName());
                 jsonObject.put("coupon", customer.getCoupon());
-
-                // AllergyInfo 객체를 JSON 형식으로 변환하여 저장
-                AllergyInfo allergyInfo = customer.getAllergyInfo();
-                JSONObject allergyInfoObject = new JSONObject();
-                List<String> allergens = allergyInfo.getAllergens();
-                JSONArray allergensArray = new JSONArray(allergens);
-                allergyInfoObject.put("allergens", allergensArray);
-                jsonObject.put("allergyInfo", allergyInfoObject);
-
                 jsonArray.put(jsonObject);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -99,12 +94,12 @@ public class CustomerRepository {
         return jsonArray.toString();
     }
 
-    public void addCustomerInfo(Customer customer) {
+    public synchronized void modifyCustomerInfo(Customer customer) {
         customerList.add(customer);
         String jsonCustomerList = writeCustomerToJson(customerList);
 
         // 변환된 JSON 문자열을 파일에 쓰기
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/src/main/resources/customerData"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(JSON_FILE_PATH))) {
             writer.write(jsonCustomerList);
         } catch (IOException e) {
             e.printStackTrace();
