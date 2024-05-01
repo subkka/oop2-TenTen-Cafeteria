@@ -31,7 +31,7 @@ public class MainController {
         // 고객 선택 (고객의 수만큼 반복)
         if (userType == 1) {
         while( cnt < customerList.size() ) {
-            System.out.println("어서 오세요~ " + Objects.requireNonNull(customerList.poll()).getName());
+            System.out.println("어서 오세요~ " + Objects.requireNonNull(customerList.peek()).getName());
             boolean endFlag = false;
                 while (true) {
                     if(endFlag) break;
@@ -46,7 +46,7 @@ public class MainController {
                         // 보유 식권개수 조회
                     } else if (chooseNum == 2) {
                         while (true) {
-                            Customer customer = customerList.peek();
+                            Customer customer = customerList.poll();
                             System.out.println(customer.getCoupon() + "개 보유중입니다.");
                             // 식권 구매 여부
                             System.out.print("식권을 구매하시겠습니까?(Y/N) ");
