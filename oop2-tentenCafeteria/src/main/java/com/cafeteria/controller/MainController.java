@@ -29,19 +29,20 @@ public class MainController {
 
         int cnt = 0;
         // 고객 선택 (고객의 수만큼 반복)
+        if (userType == 1) {
         while( cnt < customerList.size() ) {
-            System.out.println("어서 오세요~ " + customerList.peek().getName());
-            if (userType == 1) {
-                System.out.print("""
+            System.out.println("어서 오세요~ " + Objects.requireNonNull(customerList.poll()).getName());
+            boolean endFlag = false;
+                while (true) {
+                    if(endFlag) break;
+                    System.out.print("""
                         1. 메뉴보기
                         2. 식권개수 조회
                         """);
-                while (sc.hasNext()) {
                     int chooseNum = sc.nextInt();
                     // 메뉴보기
                     if (chooseNum == 1) {
                         main.showWeekMenu();
-                        break;
                         // 보유 식권개수 조회
                     } else if (chooseNum == 2) {
                         while (true) {
@@ -76,6 +77,7 @@ public class MainController {
                                         customerRepository.modifyCustomerInfo(customerUseCoupon);
                                         System.out.println("배식 완료");
                                         cnt++;
+                                        endFlag = true;
                                         break;
                                         // To-do 배식 완료 후 이동할 곳 정하기
 
@@ -83,6 +85,7 @@ public class MainController {
                                     } else {
                                         System.out.println("다음에 또 오세요");
                                         cnt++;
+                                        endFlag = true;
                                         break;
                                         // To-do 배식 완료 후 이동할 곳 정하기
                                     }
@@ -93,30 +96,28 @@ public class MainController {
                     // 1. 메뉴보기, 2.식권개수 조회 아닌 다른 숫자 입력했을시 오류출력
                     else {
                         System.out.println("잘못된 입력입니다.");
-                        break;
                     }
                 }
             }
-
-            // 관리자
-            else {
-                System.out.print("""
+        }
+        // 관리자
+        else {
+            System.out.print("""
                         매출 조회를 선택하세요
                         1. 원하는 기간의 매출 조회
                         2. 현재 매출 조회
                         """);
-                while (sc.hasNext()) {
-                    int chooseNum = sc.nextInt();
+            while (sc.hasNext()) {
+                int chooseNum = sc.nextInt();
 
-                    // 원하는 기간의 매출
-                    if (chooseNum == 1)
-                        System.out.println(main.getSales() + "원");
-                        // 현재 매출
-                    else if (chooseNum == 2)
-                        System.out.println(admin.getTotalSales() + "원");
-                    else
-                        System.out.println("잘못된 입력입니다.");
-                }
+                // 원하는 기간의 매출
+                if (chooseNum == 1)
+                    System.out.println(main.getSales() + "원");
+                    // 현재 매출
+                else if (chooseNum == 2)
+                    System.out.println(admin.getTotalSales() + "원");
+                else
+                    System.out.println("잘못된 입력입니다.");
             }
         }
     }

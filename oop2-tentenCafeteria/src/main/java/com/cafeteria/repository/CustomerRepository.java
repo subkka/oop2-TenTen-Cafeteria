@@ -86,6 +86,16 @@ public class CustomerRepository {
                 jsonObject.put("id", customer.getId());
                 jsonObject.put("name", customer.getName());
                 jsonObject.put("coupon", customer.getCoupon());
+
+                // 알레르기 정보를 JSON 객체로 추가
+                AllergyInfo allergyInfo = customer.getAllergyInfo();
+                if (allergyInfo != null) {
+                    JSONArray allergensArray = new JSONArray(allergyInfo.getAllergens());
+                    JSONObject allergyInfoObject = new JSONObject();
+                    allergyInfoObject.put("allergens", allergensArray);
+                    jsonObject.put("allergyInfo", allergyInfoObject);
+                }
+
                 jsonArray.put(jsonObject);
             } catch (JSONException e) {
                 e.printStackTrace();
