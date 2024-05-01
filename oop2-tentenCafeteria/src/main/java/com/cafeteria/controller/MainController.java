@@ -56,14 +56,14 @@ public class MainController {
                             if (buyCouponYN == 'Y') {
                                 // 쿠폰 구매 후 고객 정보
                                 Customer customerCouponAmount = kiosk.buyCoupon(customer);
-                                customerRepository.addCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
+                                customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
                                 continue;
                             } else {
                                 // 식권이 0장일때
                                 if (customer.getCoupon() == 0) {
                                     System.out.println("보유 식권은 0장입니다. 구매창으로 이동합니다");
                                     Customer customerCouponAmount = kiosk.buyCoupon(customer);
-                                    customerRepository.addCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
+                                    customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
                                     continue;
                                     // 식권이 1장 이상일때
                                 } else {
@@ -75,7 +75,7 @@ public class MainController {
                                     if (eatYN == 'Y') {
                                         // 쿠폰 사용 후 쿠폰 개수 -1된 고객 정보
                                         Customer customerUseCoupon = kiosk.useCoupon(customer);
-                                        customerRepository.addCustomerInfo(customerUseCoupon);
+                                        customerRepository.modifyCustomerInfo(customerUseCoupon);
                                         System.out.println("배식 완료");
                                         cnt++;
                                         break;
