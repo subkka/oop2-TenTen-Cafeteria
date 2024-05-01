@@ -83,6 +83,8 @@ public class CustomerRepository {
             JSONObject jsonObject = new JSONObject();
 
             try {
+                jsonObject.put("id", customer.getId());
+                jsonObject.put("name", customer.getName());
                 jsonObject.put("coupon", customer.getCoupon());
                 jsonArray.put(jsonObject);
             } catch (JSONException e) {

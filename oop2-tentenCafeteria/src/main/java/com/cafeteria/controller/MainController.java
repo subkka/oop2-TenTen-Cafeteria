@@ -8,10 +8,7 @@ import com.cafeteria.repository.CustomerRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainController {
     private static Scanner sc = new Scanner(System.in);
@@ -24,7 +21,7 @@ public class MainController {
         kiosk = new Kiosk();
         admin = new Admin();
         customerRepository = new CustomerRepository();
-        Queue<Customer> customerList = null;
+        Queue<Customer> customerList = new LinkedList<>(main.readCustomerInfo());
         String allergyInfo = null;
 
         System.out.print("> 사용자를 선택하세요 1. 고객 / 2. 관리자: ");
@@ -33,6 +30,7 @@ public class MainController {
         int cnt = 0;
         // 고객 선택 (고객의 수만큼 반복)
         while( cnt < customerList.size() ) {
+            System.out.println("어서 오세요~ " + customerList.peek().getName());
             if (userType == 1) {
                 System.out.print("""
                         1. 메뉴보기
