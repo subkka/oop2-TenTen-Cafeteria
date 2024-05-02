@@ -115,9 +115,7 @@ public class MainController {
                 // 원하는 기간의 매출
                 if (chooseNum == 1)
                     System.out.println(main.getSales() + "원");
-                    // 현재 매출
-                else if (chooseNum == 2)
-                    System.out.println(admin.getTotalSales() + "원");
+
                 else
                     System.out.println("잘못된 입력입니다.");
             }
@@ -147,7 +145,7 @@ public class MainController {
             System.out.println("잘못된 입력입니다.");
             e.printStackTrace();
         }
-
+        System.out.println(startDate.getTime() +" "+ endDate.getTime());
         return admin.getSales(startDate, endDate);
     }
 
