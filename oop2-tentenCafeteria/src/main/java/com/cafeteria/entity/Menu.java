@@ -14,7 +14,11 @@
         List<Meal> meals = new ArrayList<>();
         AllergyInfo allergyInfo;
 
-        public Menu(Date date,List<Meal> meal, AllergyInfo allergyInfo) {
+        public Menu(List<Meal> meals) {
+            this.meals = meals;
+        }
+
+        public Menu(Date date, List<Meal> meal, AllergyInfo allergyInfo) {
             this.date = date;
             this.meals = meal;
             this.allergyInfo = allergyInfo;

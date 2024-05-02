@@ -4,16 +4,29 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-@Getter
-@Setter
+
 
 public class SalesLog {
     private Date saleDate;
     private int sales;
+    private Customer customer;
+    private Menu menu;
 
-    public SalesLog(Date saleDate, int sales) {
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+
+
+    public SalesLog(Date saleDate, int sales, Customer customer, Menu menu) {
         this.saleDate = saleDate;
         this.sales = sales;
+        this.customer = customer;
+        this.menu = menu;
     }
 
     public Date getSaleDate() {

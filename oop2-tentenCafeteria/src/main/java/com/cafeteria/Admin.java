@@ -17,7 +17,8 @@ public class Admin {
     }
 
     // 총 매출 정보 가져오기
-    public int getTotalSales() {
+    public int getTotalSales(Date startDate, Date endDate) {
+        salesRepository.readSalesInfo(startDate, endDate);
         return 0;
     }
 

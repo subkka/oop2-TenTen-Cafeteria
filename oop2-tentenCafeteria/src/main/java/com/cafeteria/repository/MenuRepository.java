@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MenuRepository {
-    private List<Menu> menuList = new ArrayList<>();;
+    private List<Menu> menuList = new ArrayList<>();
     private static final String JSON_FILE_PATH = "oop2-tentenCafeteria/src/main/resources/menuData.json";
 
     public MenuRepository() {
@@ -138,7 +138,6 @@ public class MenuRepository {
         for (Menu menu : menuList) {
             long menuDateTime = menu.getDate().getTime();
             if (menuDateTime >= startDateTime && menuDateTime <= endDateTime) {
-
                 result.add(menu);
             }
         }

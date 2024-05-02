@@ -14,6 +14,12 @@ public class Customer {
     AllergyInfo allergyInfo;
 
     public Customer() {}
+
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Customer(int id, String name, int coupon, AllergyInfo allergyInfo) {
         this.id = id;
         this.name = name;
