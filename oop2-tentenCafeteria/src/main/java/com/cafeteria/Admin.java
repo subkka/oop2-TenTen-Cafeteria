@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-
+@Setter
+@Getter
 public class Admin {
-    @Setter
-    @Getter
+
     private String admin_id;
     private SalesRepository salesRepository;
 
-    public Admin() {}
+    public Admin() {
+        salesRepository = new SalesRepository();
+    }
 
     // 총 매출 정보 가져오기
     public int getTotalSales() {

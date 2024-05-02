@@ -15,45 +15,54 @@ public class SalesRepository {
     private static final String JSON_FILE_PATH = "oop2-tentenCafeteria/src/main/resources/saleData.json";
 
     public SalesRepository() {
+
+        salesLogList = new ArrayList<>();
         salesLogList = readSalesFromJson();
-        if (salesLogList == null) {
-            salesLogList = new ArrayList<>();
-        }
+
     }
 
     private List<SalesLog> readSalesFromJson() {
         try (BufferedReader reader = new BufferedReader(new FileReader(JSON_FILE_PATH))) {
             StringBuilder jsonString = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                jsonString.append(line);
+            if (!jsonString.isEmpty()) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    jsonString.append(line);
+                }
+                // JSON 문자열을 SalesLog 리스트로 변환
+                return parseJsonToSalesLogList(jsonString.toString());
             }
-            // JSON 문자열을 SalesLog 리스트로 변환
-            return parseJsonToSalesLogList(jsonString.toString());
+            return new ArrayList<>();
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
+
     }
 
     private List<SalesLog> parseJsonToSalesLogList(String jsonString) {
         List<SalesLog> salesLogList = new ArrayList<>();
-        try {
-            // JSON 배열 형태로 저장된 데이터를 읽어옵니다.
-            JSONArray jsonArray = new JSONArray(jsonString);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                // 각 객체에서 필요한 정보를 추출하여 SalesLog 객체로 변환합니다.
-                Date saledate = new Date(jsonObject.getLong("date"));
-                int sales = jsonObject.getInt("price");
-                // SalesLog 객체를 생성하여 salesLogList에 추가합니다.
-                SalesLog salesLog = new SalesLog(saledate,sales);
-                salesLogList.add(salesLog);
+
+        JSONArray jsonArray = new JSONArray(jsonString);
+        if(!jsonArray.isEmpty()) {
+            try {
+                // JSON 배열 형태로 저장된 데이터를 읽어옵니다.
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    // 각 객체에서 필요한 정보를 추출하여 SalesLog 객체로 변환합니다.
+                    Date saledate = new Date(jsonObject.getLong("date"));
+                    int sales = jsonObject.getInt("price");
+                    // SalesLog 객체를 생성하여 salesLogList에 추가합니다.
+                    SalesLog salesLog = new SalesLog(saledate, sales);
+                    salesLogList.add(salesLog);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        return salesLogList;
+            return salesLogList;
+
     }
 
     private String writeSalesToJson(List<SalesLog> salesLogList) {

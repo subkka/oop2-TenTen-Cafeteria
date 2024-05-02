@@ -6,14 +6,16 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@Setter
-@AllArgsConstructor
+
 public class Meal {
     private String foodType;
     private String foodName;
     List<String> ingredients = new ArrayList<>();
-
+    public Meal(String foodType, String foodName, List<String> ingredients) {
+        this.foodType = foodType;
+        this.foodName = foodName;
+        this.ingredients = ingredients;
+    }
     public String getFoodType() {
         return foodType;
     }
@@ -28,5 +30,8 @@ public class Meal {
 
     public void setFoodName(String foodName) {
         this.foodName = foodName;
+    }
+    public List<String> getIngredients(){
+        return ingredients;
     }
 }

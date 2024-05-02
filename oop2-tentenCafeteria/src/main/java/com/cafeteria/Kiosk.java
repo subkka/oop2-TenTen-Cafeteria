@@ -14,10 +14,13 @@ import java.util.Scanner;
 public class Kiosk {
     private Date currentDate;
     private List<Menu> weeklyMenu;
-    private SalesRepository salesRepository;
-    private MenuRepository menuRepository;
+    private final SalesRepository salesRepository;
+    private final MenuRepository menuRepository;
 
     public Kiosk() {
+
+        salesRepository = new SalesRepository();
+        menuRepository = new MenuRepository();
     }
 
     public Kiosk(Date currentDate, List<Menu> weeklyMenu, SalesRepository salesRepository, MenuRepository menuRepository) {
@@ -27,12 +30,19 @@ public class Kiosk {
         this.menuRepository = menuRepository;
     }
     public void displayDailyMenu() {
-        Menu dailyMenu = (Menu) menuRepository.readMenuInfo(currentDate, currentDate);
+        currentDate = new Date();
+        Date endDate = new Date(currentDate.getTime() + 2 * 24 * 60 * 60 * 1000);
+
+        Menu dailyMenu = null;
+        List<Menu> menuList = menuRepository.readMenuInfo(currentDate, endDate);
+        if (!menuList.isEmpty()) {
+            dailyMenu = menuList.get(0);
+        }
         System.out.println("오늘의 식단");
         System.out.println(dailyMenu);
     }
     public void displayWeekMenu() {
-
+        currentDate = new Date();
         Date endDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
 
         weeklyMenu = menuRepository.readMenuInfo(currentDate, endDate);
@@ -72,13 +82,21 @@ public class Kiosk {
 
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
         AllergyInfo commonAllergies = new AllergyInfo();
+        currentDate = new Date();
+        Date endDate = new Date(currentDate.getTime() + 2 * 24 * 60 * 60 * 1000);
 
-        for (Menu menu : weeklyMenu) {
-            AllergyInfo menuAllergyInfo = menu.getAllergyInfo();
-            List<String> commonAllergens = findCommonAllergens(customerAllergy, menuAllergyInfo);
+        Menu dailyMenu = null;
+        List<Menu> menuList = menuRepository.readMenuInfo(currentDate, endDate);
+        if (!menuList.isEmpty()) {
+            dailyMenu = menuList.get(0);
+        }
 
-            if (!commonAllergens.isEmpty()) {
-                commonAllergies.addAllergens(commonAllergens);
+        if (dailyMenu != null) {
+            AllergyInfo menuAllergyInfo = dailyMenu.getAllergyInfo();
+            for (String allergy : menuAllergyInfo.getAllergens()) {
+                if (customerAllergy.getAllergens().contains(allergy)) {
+                    commonAllergies.addAllergen(allergy);
+                }
             }
         }
 
