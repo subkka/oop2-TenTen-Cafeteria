@@ -172,7 +172,6 @@ public class MainController {
             System.out.println("잘못된 입력입니다.");
             e.printStackTrace();
         }
-        System.out.println(startDate.getTime() +" "+ endDate.getTime());
         return admin.getSales(startDate, endDate);
     }
 
