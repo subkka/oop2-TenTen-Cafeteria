@@ -3,6 +3,8 @@ package com.cafeteria;
 import com.cafeteria.entity.AllergyInfo;
 import com.cafeteria.entity.Customer;
 import com.cafeteria.entity.Menu;
+import com.cafeteria.entity.SalesLog;
+import com.cafeteria.repository.CustomerRepository;
 import com.cafeteria.repository.MenuRepository;
 import com.cafeteria.repository.SalesRepository;
 
@@ -15,6 +17,7 @@ import java.util.Scanner;
 public class Kiosk {
     private Date currentDate;
     private List<Menu> weeklyMenu;
+    private int sales;
     private final SalesRepository salesRepository;
     private final MenuRepository menuRepository;
 
@@ -68,14 +71,25 @@ public class Kiosk {
         return customer;
     }
     public Customer buyCoupon(Customer customer) {
+        currentDate = new Date();
         Scanner sc = new Scanner(System.in);
         while (true) {
+            int sales = 8000;
             System.out.println("식권을 몇장 구매하시겠습니까? (1장에서 10장까지 가능합니다)");
             int num = sc.nextInt();
             if (num >= 1 && num <= 10) {
                 customer.setCoupon(customer.getCoupon() + num);
                 System.out.println("식권 " + num + "장을 구매하였습니다.");
                 System.out.println();
+
+                Date endDate = new Date(currentDate.getTime() + 2 * 24 * 60 * 60 * 1000);
+                Menu dailyMenu = null;
+                List<Menu> menuList = menuRepository.readMenuInfo(currentDate, endDate);
+
+                if (!menuList.isEmpty()) {
+                    dailyMenu = menuList.get(0);
+                }
+                salesRepository.addSalesLog(new SalesLog(currentDate,sales,customer,dailyMenu));
                 break;
             } else {
                 System.out.println("1에서 10 사이의 값을 입력하세요.");
@@ -106,9 +120,9 @@ public class Kiosk {
             }
             else commonAllergies = null;
         }
-
         return commonAllergies;
     }
+
 
     private List<String> findCommonAllergens(AllergyInfo customerAllergy, AllergyInfo menuAllergy) {
         List<String> commonAllergens = new ArrayList<>();
