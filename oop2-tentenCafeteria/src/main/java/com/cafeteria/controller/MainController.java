@@ -46,7 +46,7 @@ public class MainController {
                         // 보유 식권개수 조회
                     } else if (chooseNum == 2) {
                         while (true) {
-                            Customer customer = customerList.poll();
+                            Customer customer = customerList.peek();
                             System.out.println(customer.getCoupon() + "개 보유중입니다.");
                             // 식권 구매 여부
                             System.out.print("식권을 구매하시겠습니까?(Y/N) ");
@@ -66,6 +66,7 @@ public class MainController {
                                     continue;
                                     // 식권이 1장 이상일때
                                 } else {
+                                    customerList.poll();
                                     // 오늘의 메뉴와 고객정보의 알레르기 비교
                                     AllergyInfo sameAllergyInfo = kiosk.compareAllergy(customer.getAllergyInfo());
                                     System.out.print("식사메뉴에" + sameAllergyInfo + "가 포함됩니다\n식사하시겠습니까?(Y/N) ");
@@ -89,6 +90,7 @@ public class MainController {
                                         break;
                                         // To-do 배식 완료 후 이동할 곳 정하기
                                     }
+
                                 }
                             }
                         }
