@@ -8,10 +8,7 @@ import com.cafeteria.repository.CustomerRepository;
 import com.cafeteria.repository.MenuRepository;
 import com.cafeteria.repository.SalesRepository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Kiosk {
     private Date currentDate;
@@ -33,7 +30,17 @@ public class Kiosk {
         this.menuRepository = menuRepository;
     }
     public void displayDailyMenu() {
-        currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+
+        // 시간을 00:00:00 으로 설정
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        // 현재 날짜까지만 포함하고 시간은 00:00:00 으로 설정된 Date 객체 얻기
+        Date currentDateOnly = calendar.getTime();
+        currentDate = currentDateOnly;
         Date endDate = new Date(currentDate.getTime() + 2 * 24 * 60 * 60 * 1000);
 
         Menu dailyMenu = null;
@@ -45,7 +52,17 @@ public class Kiosk {
         System.out.println(dailyMenu);
     }
     public void displayWeekMenu() {
-        currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+
+        // 시간을 00:00:00 으로 설정
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        // 현재 날짜까지만 포함하고 시간은 00:00:00 으로 설정된 Date 객체 얻기
+        Date currentDateOnly = calendar.getTime();
+        currentDate = currentDateOnly;
         Date endDate = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
 
         weeklyMenu = menuRepository.readMenuInfo(currentDate, endDate);
@@ -68,7 +85,17 @@ public class Kiosk {
         return customer;
     }
     public Customer buyCoupon(Customer customer) {
-        currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+
+        // 시간을 00:00:00 으로 설정
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        // 현재 날짜까지만 포함하고 시간은 00:00:00 으로 설정된 Date 객체 얻기
+        Date currentDateOnly = calendar.getTime();
+        currentDate = currentDateOnly;
         Scanner sc = new Scanner(System.in);
         while (true) {
             int sales = 8000;
@@ -85,7 +112,9 @@ public class Kiosk {
                 if (!menuList.isEmpty()) {
                     dailyMenu = menuList.get(0);
                 }
-                salesRepository.addSalesLog(new SalesLog(currentDate,sales,customer,dailyMenu));
+                for(int i = 0; i< num; i++) {
+                    salesRepository.addSalesLog(new SalesLog(currentDate, sales, customer, dailyMenu));
+                }
                 break;
             } else {
                 System.out.println("1에서 10 사이의 값을 입력하세요.");
