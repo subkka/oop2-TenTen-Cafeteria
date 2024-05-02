@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -67,8 +68,9 @@ public class SalesRepository {
     public List<SalesLog> readSalesInfo(Date startDate, Date endDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.println("Sales information between " + dateFormat.format(startDate) +
-                " and " + dateFormat.format(endDate) + ":");
+//        System.out.println("Sales information between " + dateFormat.format(startDate) +
+//                " and " + dateFormat.format(endDate) + ":");
+
         List<SalesLog> salesLogs = new ArrayList<>();
         for (SalesLog sale : salesLogList) {
             if (sale.getSaleDate().after(startDate) && sale.getSaleDate().before(endDate)) {
