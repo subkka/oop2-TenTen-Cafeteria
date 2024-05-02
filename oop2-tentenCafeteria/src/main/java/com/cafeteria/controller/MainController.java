@@ -24,93 +24,118 @@ public class MainController {
         Queue<Customer> customerList = new LinkedList<>(main.readCustomerInfo());
         String allergyInfo = null;
 
-        System.out.print("> 사용자를 선택하세요 1. 고객 / 2. 관리자: ");
-        int userType = sc.nextInt();
+        while(true) {
+            System.out.print("""
+                    🍀💊🍀💊🍀💊 Ten Ten Cafeteria 💊🍀💊🍀💊🍀
+                    사용자를 선택하세요
+                    1. 고객
+                    2. 관리자
+                    : """);
+            int userType = sc.nextInt();
+            System.out.println();
 
-        int cnt = 0;
-        // 고객 선택 (고객의 수만큼 반복)
-        if (userType == 1) {
-        while( cnt < customerList.size() ) {
-            System.out.println("어서 오세요~ " + Objects.requireNonNull(customerList.peek()).getName());
-            boolean endFlag = false;
-                while (true) {
-                    if(endFlag) break;
-                    System.out.print("""
-                        1. 메뉴보기
-                        2. 식권개수 조회
-                        """);
-                    int chooseNum = sc.nextInt();
-                    // 메뉴보기
-                    if (chooseNum == 1) {
-                        main.showWeekMenu();
-                        // 보유 식권개수 조회
-                    } else if (chooseNum == 2) {
+            int cnt = 0;
+            // 고객 선택 (고객의 수만큼 반복)
+            if (userType == 1) {
+                if (!customerList.isEmpty()) {
+                    welcome:
+                    while (cnt < customerList.size()) {
+                        System.out.println("🤩 어서 오세요~ " + Objects.requireNonNull(customerList.peek()).getName() + "님 🤩");
+                        Customer customer = customerList.peek();
+                        boolean endFlag = false;
                         while (true) {
-                            Customer customer = customerList.peek();
-                            System.out.println(customer.getCoupon() + "개 보유중입니다.");
-                            // 식권 구매 여부
-                            System.out.print("식권을 구매하시겠습니까?(Y/N) ");
-                            char buyCouponYN = sc.next().toUpperCase().charAt(0);
-                            // 쿠폰을 구매하는 경우
-                            if (buyCouponYN == 'Y') {
-                                // 쿠폰 구매 후 고객 정보
-                                Customer customerCouponAmount = kiosk.buyCoupon(customer);
-                                customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
-                                continue;
-                            } else {
-                                // 식권이 0장일때
-                                if (customer.getCoupon() == 0) {
-                                    System.out.println("보유 식권은 0장입니다. 구매창으로 이동합니다");
-                                    Customer customerCouponAmount = kiosk.buyCoupon(customer);
-                                    customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
-                                    continue;
-                                    // 식권이 1장 이상일때
-                                } else {
-                                    customerList.poll();
-                                    // 오늘의 메뉴와 고객정보의 알레르기 비교
-                                    AllergyInfo sameAllergyInfo = kiosk.compareAllergy(customer.getAllergyInfo());
-                                    System.out.print("식사메뉴에" + sameAllergyInfo + "가 포함됩니다\n식사하시겠습니까?(Y/N) ");
-                                    char eatYN = sc.next().toUpperCase().charAt(0);
-                                    // 식사를 함
-                                    if (eatYN == 'Y') {
-                                        // 쿠폰 사용 후 쿠폰 개수 -1된 고객 정보
-                                        Customer customerUseCoupon = kiosk.useCoupon(customer);
-                                        customerRepository.modifyCustomerInfo(customerUseCoupon);
-                                        System.out.println("배식 완료");
-                                        cnt++;
-                                        endFlag = true;
-                                        break;
-                                        // To-do 배식 완료 후 이동할 곳 정하기
+                            if (endFlag) break;
+                            System.out.print("""
+                                    =====================================
+                                    원하는 메뉴를 선택해주세요!
+                                    1. 메뉴보기
+                                    2. 식권개수 조회
+                                    :""");
+                            int chooseNum = sc.nextInt();
+                            System.out.println();
+                            // 메뉴보기
+                            if (chooseNum == 1) {
+                                main.showWeekMenu();
+                                // 보유 식권개수 조회
+                            } else if (chooseNum == 2) {
+                                System.out.println(customer.getCoupon() + "개 보유중입니다.");
+                                System.out.println("=====================================");
+                                while (true) {
+                                    // 식권 구매 여부
+                                    System.out.print("식권을 구매하시겠습니까?(Y/N) ");
+                                    char buyCouponYN = sc.next().toUpperCase().charAt(0);
+                                    // 쿠폰을 구매하는 경우
+                                    if (buyCouponYN == 'Y') {
+                                        // 쿠폰 구매 후 고객 정보
+                                        Customer customerCouponAmount = kiosk.buyCoupon(customer);
+                                        customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
+                                        continue;
+                                    } else if(buyCouponYN == 'N'){
+                                        // 식권이 0장일때
+                                        if (customer.getCoupon() == 0) {
+                                            System.out.println("보유 식권은 0장입니다. 구매창으로 이동합니다");
+                                            Customer customerCouponAmount = kiosk.buyCoupon(customer);
+                                            customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
+                                            continue;
+                                            // 식권이 1장 이상일때
+                                        } else {
+                                            customerList.poll();
+                                            // 오늘의 메뉴와 고객정보의 알레르기 비교
+                                            char eatYN;
+                                            AllergyInfo sameAllergyInfo = kiosk.compareAllergy(customer.getAllergyInfo());
+                                            if (!sameAllergyInfo.isEmpty()) {
+                                                System.out.print("메뉴에 " + sameAllergyInfo + "가 포함됩니다\n식사하시겠습니까?(Y/N) ");
+                                                eatYN = sc.next().toUpperCase().charAt(0);
+                                            } else {
+                                                eatYN = 'Y';
+                                            }
+                                            // 식사를 함
+                                            if (eatYN == 'Y') {
+                                                // 쿠폰 사용 후 쿠폰 개수 -1된 고객 정보
+                                                Customer customerUseCoupon = kiosk.useCoupon(customer);
+                                                customerRepository.modifyCustomerInfo(customerUseCoupon);
+                                                System.out.println("맛있게 드세요~🍴\n");
+                                                cnt++;
+                                                endFlag = true;
+                                                break welcome;
+                                                // To-do 배식 완료 후 이동할 곳 정하기
 
-                                        // 식사를 하지 않음
-                                    } else {
-                                        System.out.println("다음에 또 오세요");
-                                        cnt++;
-                                        endFlag = true;
-                                        break;
-                                        // To-do 배식 완료 후 이동할 곳 정하기
+                                                // 식사를 하지 않음
+                                            } else if(eatYN == 'N'){
+                                                System.out.println("다음에 또 오세요~👩‍🍳");
+                                                System.out.println();
+                                                cnt++;
+                                                endFlag = true;
+                                                break welcome;
+                                                // To-do 배식 완료 후 이동할 곳 정하기
+                                            } else {
+                                                System.out.println("잘못 입력하셨습니다.\n");
+                                            }
+                                        }
+                                    }else {
+                                        System.out.println("잘못 입력하셨습니다.\n");
                                     }
-
                                 }
+                            }
+                            // 1. 메뉴보기, 2.식권개수 조회 아닌 다른 숫자 입력했을시 오류출력
+                            else {
+                                System.out.println("잘못된 입력입니다.");
                             }
                         }
                     }
-                    // 1. 메뉴보기, 2.식권개수 조회 아닌 다른 숫자 입력했을시 오류출력
-                    else {
-                        System.out.println("잘못된 입력입니다.");
-                    }
+                } else {
+                    System.out.println("대기중인 고객이 없습니다. 영업을 종료합니다");
                 }
             }
-        }
-        // 관리자
-        else {
-            System.out.print("""
+            // 관리자
+            else {
+                System.out.print("""
                         매출 조회를 선택하세요
                         1. 원하는 기간의 매출 조회
                         2. 현재 매출 조회
                         """);
-            while (sc.hasNext()) {
-                int chooseNum = sc.nextInt();
+                while (sc.hasNext()) {
+                    int chooseNum = sc.nextInt();
 
                 // 원하는 기간의 매출
                 if (chooseNum == 1)
@@ -156,12 +181,13 @@ public class MainController {
 
     // 오늘의 점심 메뉴 or 일주일 식단표 보여주기
     public void showWeekMenu() {
-        System.out.println("""
+        System.out.print("""
+                =====================================
                 1. 오늘의 점심 메뉴
                 2. 일주일 식단표
-                ===================
-                """);
+                :""");
         int select = sc.nextInt();
+        System.out.println();
 
         switch (select) {
             case 1:

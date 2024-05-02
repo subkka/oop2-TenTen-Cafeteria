@@ -16,7 +16,9 @@ public class AllergyInfo {
     public List<String> getAllergens() {
         return allergens;
     }
-
+    public boolean isEmpty(){
+        return allergens.isEmpty();
+    }
     public void setAllergens(List<String> allergens) {
         this.allergens = allergens;
     }
@@ -30,7 +32,8 @@ public class AllergyInfo {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Allergens: [");
+//        stringBuilder.append("Allergens: [");
+        stringBuilder.append("[");
 
         if (allergens != null && !allergens.isEmpty()) {
             for (int i = 0; i < allergens.size(); i++) {

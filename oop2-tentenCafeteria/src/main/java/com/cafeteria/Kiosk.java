@@ -8,6 +8,7 @@ import com.cafeteria.repository.CustomerRepository;
 import com.cafeteria.repository.MenuRepository;
 import com.cafeteria.repository.SalesRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Kiosk {
             dailyMenu = menuList.get(0);
         }
         System.out.println("오늘의 식단");
+        System.out.println("===================");
         System.out.println(dailyMenu);
     }
     public void displayWeekMenu() {
@@ -50,6 +52,7 @@ public class Kiosk {
 
         weeklyMenu = menuRepository.readMenuInfo(currentDate, endDate);
         System.out.println("주간 식단");
+        System.out.println("===================");
         for (Menu menu : weeklyMenu) {
             System.out.println(menu);
         }
@@ -77,6 +80,7 @@ public class Kiosk {
             if (num >= 1 && num <= 10) {
                 customer.setCoupon(customer.getCoupon() + num);
                 System.out.println("식권 " + num + "장을 구매하였습니다.");
+                System.out.println();
 
                 Date endDate = new Date(currentDate.getTime() + 2 * 24 * 60 * 60 * 1000);
                 Menu dailyMenu = null;
@@ -107,11 +111,14 @@ public class Kiosk {
 
         if (dailyMenu != null) {
             AllergyInfo menuAllergyInfo = dailyMenu.getAllergyInfo();
-            for (String allergy : menuAllergyInfo.getAllergens()) {
-                if (customerAllergy.getAllergens().contains(allergy)) {
-                    commonAllergies.addAllergen(allergy);
+            if(!menuAllergyInfo.isEmpty()) {
+                for (String allergy : menuAllergyInfo.getAllergens()) {
+                    if (customerAllergy.getAllergens().contains(allergy)) {
+                        commonAllergies.addAllergen(allergy);
+                    }
                 }
             }
+            else commonAllergies = null;
         }
         return commonAllergies;
     }
