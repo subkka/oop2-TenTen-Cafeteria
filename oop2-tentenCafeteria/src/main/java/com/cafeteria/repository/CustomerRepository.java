@@ -83,20 +83,49 @@ public class CustomerRepository {
             JSONObject jsonObject = new JSONObject();
 
             try {
-                jsonObject.put("id", customer.getId());
-                jsonObject.put("name", customer.getName());
-                jsonObject.put("coupon", customer.getCoupon());
-
-                // 알레르기 정보를 JSON 객체로 추가
-                AllergyInfo allergyInfo = customer.getAllergyInfo();
-                if (allergyInfo != null) {
-                    JSONArray allergensArray = new JSONArray(allergyInfo.getAllergens());
-                    JSONObject allergyInfoObject = new JSONObject();
-                    allergyInfoObject.put("allergens", allergensArray);
-                    jsonObject.put("allergyInfo", allergyInfoObject);
+                // 기존의 JSON 배열에 같은 ID를 가진 고객이 있는지 확인
+                boolean customerExists = false;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject existingCustomerObject = jsonArray.getJSONObject(i);
+                    int existingCustomerId = existingCustomerObject.getInt("id");
+                    // 같은 ID를 가진 고객이 이미 있는 경우
+                    if (existingCustomerId == customer.getId()) {
+                        // 해당 고객의 정보를 업데이트
+                        existingCustomerObject.put("name", customer.getName());
+                        existingCustomerObject.put("coupon", customer.getCoupon());
+                        // 알레르기 정보 업데이트
+                        AllergyInfo allergyInfo = customer.getAllergyInfo();
+                        if (allergyInfo != null) {
+                            JSONArray allergensArray = new JSONArray(allergyInfo.getAllergens());
+                            JSONObject allergyInfoObject = new JSONObject();
+                            allergyInfoObject.put("allergens", allergensArray);
+                            existingCustomerObject.put("allergyInfo", allergyInfoObject);
+                        } else {
+                            // 알레르기 정보가 null인 경우 기존의 알레르기 정보 삭제
+                            existingCustomerObject.remove("allergyInfo");
+                        }
+                        customerExists = true;
+                        break;
+                    }
                 }
 
-                jsonArray.put(jsonObject);
+                // 같은 ID를 가진 고객이 없는 경우, 새로운 고객 정보를 JSON 객체로 추가
+                if (!customerExists) {
+                    jsonObject.put("id", customer.getId());
+                    jsonObject.put("name", customer.getName());
+                    jsonObject.put("coupon", customer.getCoupon());
+
+                    // 알레르기 정보를 JSON 객체로 추가
+                    AllergyInfo allergyInfo = customer.getAllergyInfo();
+                    if (allergyInfo != null) {
+                        JSONArray allergensArray = new JSONArray(allergyInfo.getAllergens());
+                        JSONObject allergyInfoObject = new JSONObject();
+                        allergyInfoObject.put("allergens", allergensArray);
+                        jsonObject.put("allergyInfo", allergyInfoObject);
+                    }
+
+                    jsonArray.put(jsonObject);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
