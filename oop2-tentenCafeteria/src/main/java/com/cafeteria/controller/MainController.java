@@ -22,8 +22,8 @@ public class MainController {
         admin = new Admin();
         customerRepository = new CustomerRepository();
         Queue<Customer> customerList = new LinkedList<>(main.readCustomerInfo());
-        String allergyInfo = null;
 
+        mainClose:
         while (true) {
             System.out.print("""
                     🍀💊🍀💊🍀💊 Ten Ten Cafeteria 💊🍀💊🍀💊🍀
@@ -129,25 +129,38 @@ public class MainController {
             }
             // 관리자
             else {
-                System.out.println("💰 원하는 기간의 매출을 조회합니다 💰");
-//                System.out.print("""
-//                        매출 조회를 선택하세요
-//                        1. 원하는 기간의 매출 조회
-//                        2. 현재 매출 조회
-//                        """);
-//                while (sc.hasNext()) {
-//                    int chooseNum = sc.nextInt();
+                System.out.print("""
+                        매출 조회를 선택하세요
+                        1. 원하는 기간의 매출 조회
+                        2. 키오스크 종료
+                        :""");
 
-                    // 원하는 기간의 매출
-//                    if (chooseNum == 1)
-                        System.out.println(main.getSales() + "원");
-
-//                    else
-//                        System.out.println("잘못된 입력입니다.");
-//                }
+                // 원하는 기간의 매출
+                try{
+                    while (sc.hasNext()) {
+                        int chooseNum = sc.nextInt();
+                        if (chooseNum == 1) {
+                            System.out.println("💰 원하는 기간의 매출을 조회합니다 💰");
+                            // 매출 날짜 입력 시 잘못된 값 들어갔을 때
+                            if (main.getSales() != -1) {
+                                System.out.println(main.getSales() + "원\n");
+                            } else {
+                                System.out.println(main.getSales() + "원\n");
+                            }
+                        } else if (chooseNum == 2) {
+                            System.out.println("시스템을 종료합니다🤗");
+                            break mainClose;
+                        }
+                    }
+                }catch (Exception e) {
+                    System.out.println("잘못된 입력입니다.");
+                    sc.next(); // 추측: 버퍼 안의 값을 모두 읽어서 catch문 탈출.
+                }
             }
         }
     }
+
+
 
     // 원하는 기간의 매출 조회
     public int getSales() {
@@ -159,7 +172,8 @@ public class MainController {
             startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDateString);
         } catch (ParseException e) {
             System.out.println("잘못된 입력입니다.");
-            e.printStackTrace();
+//            e.printStackTrace();
+            return -1;
         }
 
         // 마지막 일 입력
@@ -203,3 +217,4 @@ public class MainController {
         }
     }
 }
+
