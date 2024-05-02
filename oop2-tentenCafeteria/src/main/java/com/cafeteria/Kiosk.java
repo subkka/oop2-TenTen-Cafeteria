@@ -133,7 +133,17 @@ public class Kiosk {
 
     public AllergyInfo compareAllergy(AllergyInfo customerAllergy) {
         AllergyInfo commonAllergies = new AllergyInfo();
-        currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+
+        // 시간을 00:00:00 으로 설정
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        // 현재 날짜까지만 포함하고 시간은 00:00:00 으로 설정된 Date 객체 얻기
+        Date currentDateOnly = calendar.getTime();
+        currentDate = currentDateOnly;
         Date endDate = new Date(currentDate.getTime() + 2 * 24 * 60 * 60 * 1000);
 
         Menu dailyMenu = null;
