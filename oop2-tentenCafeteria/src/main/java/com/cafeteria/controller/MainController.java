@@ -142,10 +142,13 @@ public class MainController {
                         if (chooseNum == 1) {
                             System.out.println("💰 원하는 기간의 매출을 조회합니다 💰");
                             // 매출 날짜 입력 시 잘못된 값 들어갔을 때
-                            if (main.getSales() != -1) {
+                            int sales = main.getSales();
+                            if (sales != -1) {
+                                System.out.println(sales + "원\n");
+                                break;
+                            }else {
                                 System.out.println(main.getSales() + "원\n");
-                            } else {
-                                System.out.println(main.getSales() + "원\n");
+                                break;
                             }
                         } else if (chooseNum == 2) {
                             System.out.println("시스템을 종료합니다🤗");
@@ -153,7 +156,7 @@ public class MainController {
                         }
                     }
                 }catch (Exception e) {
-                    System.out.println("잘못된 입력입니다.");
+                    System.out.println("잘못된 입력입니다.\n");
                     sc.next(); // 추측: 버퍼 안의 값을 모두 읽어서 catch문 탈출.
                 }
             }
