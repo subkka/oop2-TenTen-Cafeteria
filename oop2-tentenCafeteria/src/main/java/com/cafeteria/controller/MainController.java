@@ -24,7 +24,7 @@ public class MainController {
         Queue<Customer> customerList = new LinkedList<>(main.readCustomerInfo());
         String allergyInfo = null;
 
-        while(true) {
+        while (true) {
             System.out.print("""
                     🍀💊🍀💊🍀💊 Ten Ten Cafeteria 💊🍀💊🍀💊🍀
                     사용자를 선택하세요
@@ -70,7 +70,7 @@ public class MainController {
                                         Customer customerCouponAmount = kiosk.buyCoupon(customer);
                                         customerRepository.modifyCustomerInfo(customerCouponAmount); // 고객 파일에 값 저장
                                         continue;
-                                    } else if(buyCouponYN == 'N'){
+                                    } else if (buyCouponYN == 'N') {
                                         // 식권이 0장일때
                                         if (customer.getCoupon() == 0) {
                                             System.out.println("보유 식권은 0장입니다. 구매창으로 이동합니다");
@@ -101,7 +101,7 @@ public class MainController {
                                                 // To-do 배식 완료 후 이동할 곳 정하기
 
                                                 // 식사를 하지 않음
-                                            } else if(eatYN == 'N'){
+                                            } else if (eatYN == 'N') {
                                                 System.out.println("다음에 또 오세요~👩‍🍳");
                                                 System.out.println();
                                                 cnt++;
@@ -112,7 +112,7 @@ public class MainController {
                                                 System.out.println("잘못 입력하셨습니다.\n");
                                             }
                                         }
-                                    }else {
+                                    } else {
                                         System.out.println("잘못 입력하셨습니다.\n");
                                     }
                                 }
@@ -129,20 +129,22 @@ public class MainController {
             }
             // 관리자
             else {
-                System.out.print("""
-                        매출 조회를 선택하세요
-                        1. 원하는 기간의 매출 조회
-                        2. 현재 매출 조회
-                        """);
-                while (sc.hasNext()) {
-                    int chooseNum = sc.nextInt();
+                System.out.println("💰 원하는 기간의 매출을 조회합니다 💰");
+//                System.out.print("""
+//                        매출 조회를 선택하세요
+//                        1. 원하는 기간의 매출 조회
+//                        2. 현재 매출 조회
+//                        """);
+//                while (sc.hasNext()) {
+//                    int chooseNum = sc.nextInt();
 
-                // 원하는 기간의 매출
-                if (chooseNum == 1)
-                    System.out.println(main.getSales() + "원");
+                    // 원하는 기간의 매출
+//                    if (chooseNum == 1)
+                        System.out.println(main.getSales() + "원");
 
-                else
-                    System.out.println("잘못된 입력입니다.");
+//                    else
+//                        System.out.println("잘못된 입력입니다.");
+//                }
             }
         }
     }
