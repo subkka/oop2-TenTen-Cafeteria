@@ -12,7 +12,8 @@
 
 
 ## ✨ 파일 구조 ✨
-![0.png](..%2F..%2FUsers%2FTECH5-13%2FDesktop%2F%EC%9D%B4%EB%AF%B8%EC%A7%80%2F0.png)
+![0](https://github.com/subkka/oop2-TenTen-Cafeteria/assets/95676035/c46702f1-db13-4f4c-9dd7-c80892b68452)
+
 
 ## 🎀 클래스 다이어그램 🎀
-![image_720.png](..%2F..%2FUsers%2FTECH5-13%2FAppData%2FLocal%2FTemp%2Fimage_720.png)
+![326672616-c61a395a-5c8e-40d9-934e-15f55addbd6e](https://github.com/subkka/oop2-TenTen-Cafeteria/assets/95676035/3855034d-4d4c-4810-a69d-9f286d5911fe)
