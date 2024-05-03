@@ -157,7 +157,7 @@ public class MainController {
                     }
                 }catch (Exception e) {
                     System.out.println("잘못된 입력입니다.\n");
-                    sc.next(); // 추측: 버퍼 안의 값을 모두 읽어서 catch문 탈출.
+                    sc.nextLine(); // 추측: 버퍼 안의 값을 모두 읽어서 catch문 탈출.
                 }
             }
         }
